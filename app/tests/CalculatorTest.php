@@ -1,9 +1,6 @@
 <?php
 
-use Katas\Addition;
 use Katas\Calculator;
-use Katas\Multiplication;
-use Katas\Subtraction;
 
 class CalculatorTest extends PHPUnit_Framework_TestCase {
 
@@ -25,13 +22,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
 
     public function test_result_defaults_to_zero()
     {
-//        $this->assertSame(0, $this->calculator->calculate());
-        $this->calculator->setOperands(0);
-        $this->calculator->setOperation(new Addition());
-        $result = $this->calculator->calculate();
-
-        $this->assertEquals(0, $result);
-
+        $this->assertSame(0, $this->calculator->getResult());
     }
 
     /**
@@ -39,13 +30,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
      */
     public function test_adds_numbers()
     {
-//        $this->calculator->add(5);
-//        $this->assertEquals(5, $this->calculator->getResult());
-        $this->calculator->setOperands(5);
-        $this->calculator->setOperation(new Addition());
-        $result = $this->calculator->calculate();
-
-        $this->assertEquals(5, $result);
+        $this->calculator->add(5);
+        $this->assertEquals(5, $this->calculator->getResult());
     }
 
     /**
@@ -54,10 +40,7 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
      */
     public function test_requires_numeric_value()
     {
-//        $this->calculator->add('five');
-        $this->calculator->setOperands('five');
-        $this->calculator->setOperation(new Addition());
-        $result = $this->calculator->calculate();
+        $this->calculator->add('five');
     }
 
     /**
@@ -65,16 +48,10 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
      */
     public function test_accepts_multiple_args()
     {
-//        $this->calculator->add(1, 2, 3, 4);
-//
-//        $this->assertEquals(10, $this->calculator->getResult());
-//        $this->assertNotEquals('Snoop Doggy Dogg and Dr. Dre is at the door', $this->calculator->getResult());
+        $this->calculator->add(1, 2, 3, 4);
 
-        $this->calculator->setOperands(1,2,3,4);
-        $this->calculator->setOperation(new Addition());
-        $result = $this->calculator->calculate();
-
-        $this->assertEquals(10, $result);
+        $this->assertEquals(10, $this->calculator->getResult());
+        $this->assertNotEquals('Snoop Doggy Dogg and Dr. Dre is at the door', $this->calculator->getResult());
 
     }
 
@@ -83,14 +60,9 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
      */
     public function test_subtract()
     {
-//        $this->calculator->subtract(3);
-//        $this->assertSame(-3, $this->calculator->getResult());
+        $this->calculator->subtract(3);
+        $this->assertSame(-3, $this->calculator->getResult());
 
-        $this->calculator->setOperands(3);
-        $this->calculator->setOperation(new Subtraction());
-        $result = $this->calculator->calculate();
-
-        $this->assertEquals(-3, $result);
     }
 
     /**
@@ -98,14 +70,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase {
      */
     public function test_multiplies_numbers()
     {
-        //        $this->calculator->subtract(3);
-        //        $this->assertSame(-3, $this->calculator->getResult());
-
-        $this->calculator->setOperands(3, 2, 3);
-        $this->calculator->setOperation(new Multiplication());
-        $result = $this->calculator->calculate();
-
-        $this->assertEquals(18, $result);
+        $this->calculator->multiply(3, 4, 5);
+        $this->assertSame(60, $this->calculator->getResult());
     }
 
 }
